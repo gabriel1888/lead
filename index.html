@@ -67,6 +67,8 @@
 
   /* layout */
   .layout { display:grid; grid-template-columns: 7fr 5fr; gap:56px; padding-block:clamp(40px,8vw,60px) clamp(56px,10vw,88px); align-items:start; }
+  .layout.solo { grid-template-columns: minmax(0,660px); justify-content:center; }
+  .layout.solo .fit-head { display:none; }
   @media (max-width:960px){ .layout { grid-template-columns:1fr; gap:44px; } }
   @media (max-width:520px){
     .fit-block { padding:22px 18px; }
@@ -348,6 +350,8 @@
     step1.style.display = n === 0 ? '' : 'none';
     step2.style.display = n === 1 ? '' : 'none';
     cnt.innerHTML = n === 0 ? 'Step <b>1</b> of 2' : 'Step <b>2</b> of 2';
+    // fit-check stays on the first screen only — collapse to a centred form from step 2 on
+    document.querySelector('.layout').classList.toggle('solo', n !== 0);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
